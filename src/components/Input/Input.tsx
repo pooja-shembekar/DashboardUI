@@ -32,15 +32,18 @@ const inputVariants = cva(
   }
 );
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
+export type InputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size" | "disabled"
+> &
+  Omit<VariantProps<typeof inputVariants>, "disabled"> & {
   label?: string;
   hint?: string;
   error?: string;
   id?: string;
   size?: "sm" | "md" | "lg";
-}
+  disabled?: boolean;
+};
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
